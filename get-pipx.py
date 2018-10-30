@@ -33,7 +33,7 @@ def succeed(msg=""):
 def _run(cmd, check=True):
     cmd_str = " ".join(str(c) for c in cmd)
     logging.info(f"running {cmd_str}")
-    returncode = subprocess.run(cmd).returncode
+    returncode = subprocess.run(cmd_str).returncode
     if check and returncode:
         fail(f"{cmd_str!r} failed")
 

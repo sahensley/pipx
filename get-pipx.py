@@ -40,11 +40,16 @@ def _run(cmd, check=True):
 
 class Venv:
     def __init__(self, path, *, verbose=False, python="python3"):
-        self.root = path
-        self._python = python
-        self.bin_path = path / "bin"
+        if os.name == 'posix':
+            self.bin_path = path / "bin"
+        elif os.name == "nt":
+            self.bin_path = path / "Scripts"
+        else:
+            fail("unexpected os type")
         self.pip_path = self.bin_path / "pip"
         self.python_path = self.bin_path / "python"
+        self.root = path
+        self._python = python
         self.verbose = verbose
 
     def create_venv(self):

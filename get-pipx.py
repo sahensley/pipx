@@ -69,7 +69,7 @@ class Venv:
         self._run_pip(["install", "--upgrade", package])
 
     def _run_pip(self, cmd):
-        cmd = [self.pip_path] + cmd
+        cmd = [self.python_path, "-m", "pip"] + cmd
         if not self.verbose:
             cmd.append("-q")
         _run(cmd)
